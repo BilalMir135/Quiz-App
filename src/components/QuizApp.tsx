@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import StartingScreen from './StartingScreen';
 
 const useStyles = makeStyles(() =>
@@ -18,13 +17,22 @@ const useStyles = makeStyles(() =>
       letterSpacing: 2,
     },
     girdWrapper: {
-      margin: '30px 0',
+      height: '90vh',
+      overflow: 'hidden',
+      display: 'flex',
+      alignItems: 'center',
     },
   })
 );
 
 const QuizApp = () => {
+  const [startQuiz, setStartQuiz] = useState<boolean>(false);
   const classes = useStyles();
+
+  const handleStartClick = (): void => {
+    setStartQuiz(true);
+  };
+
   return (
     <div>
       <AppBar position='static' className={classes.root}>
@@ -36,13 +44,7 @@ const QuizApp = () => {
       </AppBar>
 
       <Grid container className={classes.girdWrapper}>
-        <Grid item xs={false} sm={1}></Grid>
-        <Grid item xs={12} sm={10}>
-          <Paper>
-            <StartingScreen />
-          </Paper>
-        </Grid>
-        <Grid item xs={false} sm={1}></Grid>
+        {!startQuiz && <StartingScreen startClickHandler={handleStartClick} />}
       </Grid>
     </div>
   );

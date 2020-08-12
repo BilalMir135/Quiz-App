@@ -1,10 +1,111 @@
 import React from 'react';
+import TextField from '@material-ui/core/TextField';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { StartingScreenType } from '../types/quizAppTypes';
 
-const StartingScreen = () => {
+const useStyles = makeStyles(() =>
+  createStyles({
+    root: {
+      padding: '50px 30px',
+      width: '100%',
+    },
+    paper: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    input: {
+      margin: '20px 0',
+      width: '100%',
+
+      '&:focus': {
+        borderBottom: '1px solid #00695f',
+      },
+    },
+    button: {
+      margin: '20px 0',
+      padding: '15px',
+      backgroundColor: '#00695f',
+      color: '#fff',
+      width: '100%',
+      '&:hover': {
+        backgroundColor: '#00695f',
+      },
+    },
+  })
+);
+
+const StartingScreen: React.FC<StartingScreenType> = ({
+  startClickHandler,
+}) => {
+  const classes = useStyles();
   return (
-    <div>
-      <h1>Starting Screen</h1>
-    </div>
+    <React.Fragment>
+      <Grid item xs={1} sm={2} lg={3}></Grid>
+      <Grid item xs={10} sm={8} lg={6}>
+        <Paper elevation={3} className={classes.paper}>
+          <div className={classes.root}>
+            <TextField
+              required
+              id='standard-required'
+              label='Name'
+              className={classes.input}
+            />
+
+            <br />
+            <FormControl className={classes.input}>
+              <InputLabel id='demo-simple-select-label'>Level</InputLabel>
+              <Select
+                labelId='demo-simple-select-label'
+                id='demo-simple-select'
+                value={'easy'}
+                /*     value={age}
+          onChange={handleChange} */
+              >
+                <MenuItem value={'easy'}>Easy</MenuItem>
+                <MenuItem value={'medium'}>Medium</MenuItem>
+                <MenuItem value={'difficult'}>Difficult</MenuItem>
+              </Select>
+            </FormControl>
+            <br />
+
+            <FormControl className={classes.input}>
+              <InputLabel id='demo-simple-select-label'>
+                No. of Questions
+              </InputLabel>
+              <Select
+                labelId='demo-simple-select-label'
+                id='demo-simple-select'
+                value={5}
+                /*     value={age}
+          onChange={handleChange} */
+              >
+                <MenuItem value={5}>5</MenuItem>
+                <MenuItem value={10}>10</MenuItem>
+                <MenuItem value={15}>15</MenuItem>
+              </Select>
+            </FormControl>
+
+            <br />
+            <Button
+              variant='contained'
+              className={classes.button}
+              onClick={startClickHandler}
+            >
+              Start Quiz
+            </Button>
+          </div>
+        </Paper>
+      </Grid>
+      <Grid item xs={1} sm={2} lg={3}></Grid>
+    </React.Fragment>
   );
 };
 
