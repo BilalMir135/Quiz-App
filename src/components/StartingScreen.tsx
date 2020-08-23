@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { StartingScreenType } from '../types/quizAppTypes';
+import { QuizContext } from '../context/QuizContext';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -24,9 +25,11 @@ const useStyles = makeStyles(() =>
     input: {
       margin: '20px 0',
       width: '100%',
-
-      '&:focus': {
-        borderBottom: '1px solid #00695f',
+      '& label.Mui-focused': {
+        color: '#00695f',
+      },
+      '& .MuiInput-underline:after': {
+        borderBottomColor: '#00695f',
       },
     },
     button: {
@@ -46,6 +49,13 @@ const StartingScreen: React.FC<StartingScreenType> = ({
   startClickHandler,
 }) => {
   const classes = useStyles();
+  const {
+    quizMetaData,
+    changeName,
+    changeLevel,
+    changeTotalQuestions,
+  } = useContext(QuizContext);
+
   return (
     <React.Fragment>
       <Grid item xs={1} sm={2} lg={3}></Grid>
@@ -57,6 +67,7 @@ const StartingScreen: React.FC<StartingScreenType> = ({
               id='standard-required'
               label='Name'
               className={classes.input}
+              onChange={changeName}
             />
 
             <br />
@@ -65,9 +76,8 @@ const StartingScreen: React.FC<StartingScreenType> = ({
               <Select
                 labelId='demo-simple-select-label'
                 id='demo-simple-select'
-                value={'easy'}
-                /*     value={age}
-          onChange={handleChange} */
+                value={quizMetaData.level}
+                onChange={changeLevel}
               >
                 <MenuItem value={'easy'}>Easy</MenuItem>
                 <MenuItem value={'medium'}>Medium</MenuItem>
@@ -83,13 +93,12 @@ const StartingScreen: React.FC<StartingScreenType> = ({
               <Select
                 labelId='demo-simple-select-label'
                 id='demo-simple-select'
-                value={5}
-                /*     value={age}
-          onChange={handleChange} */
+                value={quizMetaData.totalQuestions}
+                onChange={changeTotalQuestions}
               >
-                <MenuItem value={5}>5</MenuItem>
-                <MenuItem value={10}>10</MenuItem>
-                <MenuItem value={15}>15</MenuItem>
+                <MenuItem value={'5'}>5</MenuItem>
+                <MenuItem value={'10'}>10</MenuItem>
+                <MenuItem value={'15'}>15</MenuItem>
               </Select>
             </FormControl>
 

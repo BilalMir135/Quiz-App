@@ -1,10 +1,13 @@
 import React from 'react';
 import QuizApp from './components/QuizApp';
+import QuizContextProvider from './context/QuizContext';
 
 const App = () => {
   return (
     <div>
-      <QuizApp />
+      <QuizContextProvider>
+        <QuizApp />
+      </QuizContextProvider>
     </div>
   );
 };
