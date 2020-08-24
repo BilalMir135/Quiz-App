@@ -8,3 +8,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@media (max-width: 330px) {
+  body {
+    overflow: auto;
+  }
+}
+
+.MuiCircularProgress-colorPrimary {
+  color: #00695f !important;
+}

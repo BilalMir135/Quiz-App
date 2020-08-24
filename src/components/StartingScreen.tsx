@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { StartingScreenType } from '../types/quizAppTypes';
+import { ScreenType } from '../types/quizAppTypes';
 import { QuizContext } from '../context/QuizContext';
 
 const useStyles = makeStyles(() =>
@@ -45,9 +45,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const StartingScreen: React.FC<StartingScreenType> = ({
-  startClickHandler,
-}) => {
+const StartingScreen: React.FC<ScreenType> = ({ screenChangeHandler }) => {
   const classes = useStyles();
   const {
     quizMetaData,
@@ -99,6 +97,9 @@ const StartingScreen: React.FC<StartingScreenType> = ({
                 <MenuItem value={'5'}>5</MenuItem>
                 <MenuItem value={'10'}>10</MenuItem>
                 <MenuItem value={'15'}>15</MenuItem>
+                <MenuItem value={'20'}>20</MenuItem>
+                <MenuItem value={'25'}>25</MenuItem>
+                <MenuItem value={'30'}>30</MenuItem>
               </Select>
             </FormControl>
 
@@ -106,7 +107,7 @@ const StartingScreen: React.FC<StartingScreenType> = ({
             <Button
               variant='contained'
               className={classes.button}
-              onClick={startClickHandler}
+              onClick={screenChangeHandler}
             >
               Start Quiz
             </Button>

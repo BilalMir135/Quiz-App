@@ -5,8 +5,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import StartingScreen from './StartingScreen';
+import QuizScreen from './QuizScreen';
 import { QuizContext } from '../context/QuizContext';
-import QuizCard from './QuizCard';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -23,6 +23,9 @@ const useStyles = makeStyles(() =>
       overflow: 'hidden',
       display: 'flex',
       alignItems: 'center',
+      '@media (max-width: 330px)': {
+        height: '100vh',
+      },
     },
   })
 );
@@ -32,6 +35,7 @@ const QuizApp = () => {
   const classes = useStyles();
   const { quizMetaData } = useContext(QuizContext);
 
+  //change start screen with quiz screen
   const handleStartClick = (): void => {
     if (quizMetaData.name) {
       setStartQuiz(true);
@@ -52,8 +56,10 @@ const QuizApp = () => {
       </AppBar>
 
       <Grid container className={classes.girdWrapper}>
-        {!startQuiz && <StartingScreen startClickHandler={handleStartClick} />}
-        {startQuiz && <QuizCard />}
+        {!startQuiz && (
+          <StartingScreen screenChangeHandler={handleStartClick} />
+        )}
+        {startQuiz && <QuizScreen />}
       </Grid>
     </div>
   );
